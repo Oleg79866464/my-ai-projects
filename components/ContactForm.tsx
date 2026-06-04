@@ -33,10 +33,10 @@ export default function ContactForm() {
             <path d="M20 6 9 17l-5-5" />
           </svg>
         </div>
-        <h3 className="mt-4 text-xl font-bold text-slate-900">You&apos;re on the list!</h3>
+        <h3 className="mt-4 text-xl font-bold text-slate-900">Вы в списке!</h3>
         <p className="mt-2 text-sm text-slate-600">
-          Thanks {form.name || "there"} — we&apos;ll reach out at {form.email || "your inbox"}{" "}
-          shortly.
+          Спасибо, {form.name || "друг"} — мы свяжемся с вами по{" "}
+          {form.email || "вашей почте"} в ближайшее время.
         </p>
         <Button
           className="mt-6"
@@ -47,7 +47,7 @@ export default function ContactForm() {
             setStatus("idle");
           }}
         >
-          Send another
+          Отправить ещё
         </Button>
       </div>
     );
@@ -61,7 +61,7 @@ export default function ContactForm() {
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-slate-700">
-            Name
+            Имя
           </label>
           <input
             id="name"
@@ -69,7 +69,7 @@ export default function ContactForm() {
             required
             value={form.name}
             onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-            placeholder="Jane Doe"
+            placeholder="Иван Иванов"
             className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
           />
         </div>
@@ -83,7 +83,7 @@ export default function ContactForm() {
             required
             value={form.email}
             onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-            placeholder="jane@example.com"
+            placeholder="ivan@example.com"
             className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
           />
         </div>
@@ -91,20 +91,20 @@ export default function ContactForm() {
 
       <div>
         <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-slate-700">
-          Message
+          Сообщение
         </label>
         <textarea
           id="message"
           rows={4}
           value={form.message}
           onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
-          placeholder="Tell us what you'd like to automate…"
+          placeholder="Расскажите, что хотите автоматизировать…"
           className="w-full resize-none rounded-xl border border-slate-300 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
         />
       </div>
 
       <Button type="submit" size="lg" className="w-full" disabled={status === "submitting"}>
-        {status === "submitting" ? "Sending…" : "Request early access"}
+        {status === "submitting" ? "Отправка…" : "Получить ранний доступ"}
       </Button>
     </form>
   );

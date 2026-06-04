@@ -2,16 +2,16 @@ import Link from "next/link";
 
 const columns = [
   {
-    title: "Product",
-    links: ["Features", "Pricing", "Integrations", "Changelog"],
+    title: "Продукт",
+    links: ["Возможности", "Тарифы", "Интеграции", "Обновления"],
   },
   {
-    title: "Company",
-    links: ["About", "Careers", "Blog", "Press"],
+    title: "Компания",
+    links: ["О нас", "Вакансии", "Блог", "Пресса"],
   },
   {
-    title: "Resources",
-    links: ["Docs", "Help center", "Community", "Status"],
+    title: "Ресурсы",
+    links: ["Документация", "Центр помощи", "Сообщество", "Статус"],
   },
 ];
 
@@ -39,8 +39,9 @@ export default function Footer() {
               <span className="text-lg font-bold text-slate-900">AI Money Master</span>
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate-600">
-              Smart finance on autopilot. Track assets, automate budgeting, and let AI
-              surface the insights that actually move your money.
+              Умные финансы на автопилоте. Отслеживайте активы, автоматизируйте
+              бюджет и позвольте AI находить выводы, которые действительно
+              влияют на ваши деньги.
             </p>
           </div>
 
@@ -65,7 +66,7 @@ export default function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-8 sm:flex-row">
           <p className="text-sm text-slate-500">
-            © {new Date().getFullYear()} AI Money Master. All rights reserved.
+            © {new Date().getFullYear()} AI Money Master. Все права защищены.
           </p>
           <div className="flex gap-5 text-slate-400">
             <a href="#" aria-label="Twitter" className="transition-colors hover:text-brand-600">

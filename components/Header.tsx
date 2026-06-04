@@ -5,10 +5,10 @@ import Link from "next/link";
 import Button from "./Button";
 
 const navLinks = [
-  { label: "Features", href: "#features" },
-  { label: "How it works", href: "#how-it-works" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "Contact", href: "#contact" },
+  { label: "Возможности", href: "#features" },
+  { label: "Как это работает", href: "#how-it-works" },
+  { label: "Тарифы", href: "#pricing" },
+  { label: "Контакты", href: "#contact" },
 ];
 
 export default function Header() {
@@ -51,16 +51,16 @@ export default function Header() {
 
         <div className="hidden items-center gap-3 md:flex">
           <Button href="#contact" variant="ghost" size="sm">
-            Sign in
+            Войти
           </Button>
           <Button href="#contact" size="sm">
-            Get started
+            Начать
           </Button>
         </div>
 
         <button
           type="button"
-          aria-label="Toggle menu"
+          aria-label="Открыть меню"
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
           className="inline-flex items-center justify-center rounded-lg p-2 text-slate-700 hover:bg-slate-100 md:hidden"
@@ -99,10 +99,10 @@ export default function Header() {
             ))}
             <div className="mt-2 flex flex-col gap-2">
               <Button href="#contact" variant="secondary" size="sm">
-                Sign in
+                Войти
               </Button>
               <Button href="#contact" size="sm">
-                Get started
+                Начать
               </Button>
             </div>
           </nav>

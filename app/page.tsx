@@ -5,9 +5,9 @@ import ContactForm from "@/components/ContactForm";
 
 const features = [
   {
-    title: "Automated budgeting",
+    title: "Автоматический бюджет",
     description:
-      "Set goals once and let AI rebalance your budget every month based on real spending patterns.",
+      "Задайте цели один раз — AI каждый месяц пересчитывает бюджет на основе реальных трат.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
         <path d="M3 3v18h18" />
@@ -16,9 +16,9 @@ const features = [
     ),
   },
   {
-    title: "AI categorization",
+    title: "AI-категоризация",
     description:
-      "Every transaction is tagged automatically with 99% accuracy — no more manual bookkeeping.",
+      "Каждая транзакция помечается автоматически с точностью 99% — больше никакого ручного учёта.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
         <path d="M12 2 2 7l10 5 10-5-10-5Z" />
@@ -27,9 +27,9 @@ const features = [
     ),
   },
   {
-    title: "Asset tracking",
+    title: "Учёт активов",
     description:
-      "Bank accounts, crypto, stocks and real estate — see your entire net worth in one dashboard.",
+      "Банковские счета, крипта, акции и недвижимость — весь капитал на одной панели.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
         <rect width="20" height="14" x="2" y="5" rx="2" />
@@ -38,9 +38,9 @@ const features = [
     ),
   },
   {
-    title: "Bank-grade security",
+    title: "Банковская безопасность",
     description:
-      "256-bit encryption, read-only connections and SOC 2 compliance keep your data locked down.",
+      "256-битное шифрование, подключения только для чтения и соответствие SOC 2 надёжно защищают ваши данные.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
@@ -48,9 +48,9 @@ const features = [
     ),
   },
   {
-    title: "Smart alerts",
+    title: "Умные уведомления",
     description:
-      "Get notified about unusual charges, upcoming bills and savings opportunities in real time.",
+      "Получайте уведомления о подозрительных списаниях, предстоящих платежах и возможностях для экономии в реальном времени.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
         <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
@@ -59,9 +59,9 @@ const features = [
     ),
   },
   {
-    title: "Forecasting",
+    title: "Прогнозирование",
     description:
-      "Predictive models project your cash flow weeks ahead so you can plan with confidence.",
+      "Предиктивные модели прогнозируют ваш денежный поток на недели вперёд, чтобы вы планировали уверенно.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
         <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
@@ -73,44 +73,44 @@ const features = [
 const steps = [
   {
     step: "01",
-    title: "Connect your accounts",
-    description: "Securely link your banks, cards and investment accounts in under two minutes.",
+    title: "Подключите счета",
+    description: "Безопасно привяжите банки, карты и инвестиционные счета менее чем за две минуты.",
   },
   {
     step: "02",
-    title: "Let AI do the work",
-    description: "Transactions are categorized, budgets are built and insights start flowing.",
+    title: "Доверьтесь AI",
+    description: "Транзакции категоризируются, бюджеты формируются, а выводы начинают поступать.",
   },
   {
     step: "03",
-    title: "Master your money",
-    description: "Act on clear recommendations and watch your net worth grow month over month.",
+    title: "Управляйте деньгами",
+    description: "Следуйте понятным рекомендациям и наблюдайте, как растёт ваш капитал месяц за месяцем.",
   },
 ];
 
 const plans = [
   {
-    name: "Starter",
+    name: "Старт",
     price: "$0",
-    period: "/mo",
-    features: ["1 connected account", "Basic budgeting", "Monthly reports"],
-    cta: "Get started",
+    period: "/мес",
+    features: ["1 подключённый счёт", "Базовый бюджет", "Ежемесячные отчёты"],
+    cta: "Начать",
     highlighted: false,
   },
   {
     name: "Pro",
     price: "$12",
-    period: "/mo",
-    features: ["Unlimited accounts", "AI categorization", "Smart alerts", "Forecasting"],
-    cta: "Start free trial",
+    period: "/мес",
+    features: ["Безлимит счетов", "AI-категоризация", "Умные уведомления", "Прогнозирование"],
+    cta: "Начать пробный период",
     highlighted: true,
   },
   {
     name: "Business",
     price: "$39",
-    period: "/mo",
-    features: ["Everything in Pro", "Team workspaces", "API access", "Priority support"],
-    cta: "Contact sales",
+    period: "/мес",
+    features: ["Всё из Pro", "Командные рабочие пространства", "Доступ к API", "Приоритетная поддержка"],
+    cta: "Связаться с отделом продаж",
     highlighted: false,
   },
 ];
@@ -124,10 +124,10 @@ export default function Home() {
       <section id="features" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            Everything you need to master your money
+            Всё необходимое, чтобы управлять деньгами
           </h2>
           <p className="mt-4 text-lg text-slate-600">
-            One intelligent platform that replaces the dozen spreadsheets and apps you use today.
+            Одна умная платформа, которая заменяет десятки таблиц и приложений, которыми вы пользуетесь сейчас.
           </p>
         </div>
 
@@ -143,10 +143,10 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-              Up and running in minutes
+              Готово к работе за несколько минут
             </h2>
             <p className="mt-4 text-lg text-slate-600">
-              No spreadsheets, no manual entry. Three simple steps to financial clarity.
+              Никаких таблиц и ручного ввода. Три простых шага к ясности в финансах.
             </p>
           </div>
 
@@ -166,10 +166,10 @@ export default function Home() {
       <section id="pricing" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            Simple, transparent pricing
+            Простые и прозрачные тарифы
           </h2>
           <p className="mt-4 text-lg text-slate-600">
-            Start free. Upgrade when you&apos;re ready. Cancel anytime.
+            Начните бесплатно. Переходите на платный, когда будете готовы. Отмена в любой момент.
           </p>
         </div>
 
@@ -185,7 +185,7 @@ export default function Home() {
             >
               {plan.highlighted && (
                 <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-brand-600 px-4 py-1 text-xs font-semibold text-white">
-                  Most popular
+                  Популярный
                 </span>
               )}
               <h3 className="text-lg font-semibold text-slate-900">{plan.name}</h3>
@@ -228,16 +228,16 @@ export default function Home() {
         <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
           <div className="flex flex-col justify-center">
             <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-              Ready to put your money on autopilot?
+              Готовы поставить финансы на автопилот?
             </h2>
             <p className="mt-4 text-lg text-slate-600">
-              Join the waitlist and be the first to know when new AI features ship. No spam, ever.
+              Присоединяйтесь к списку ожидания и узнавайте первыми о новых AI-функциях. Никакого спама.
             </p>
             <ul className="mt-8 space-y-4">
               {[
-                "Free 14-day Pro trial",
-                "No credit card required",
-                "Cancel anytime",
+                "Бесплатный 14-дневный пробный период Pro",
+                "Без привязки карты",
+                "Отмена в любой момент",
               ].map((item) => (
                 <li key={item} className="flex items-center gap-3 text-slate-700">
                   <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-100 text-brand-600">

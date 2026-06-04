@@ -4,12 +4,12 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const inter = Inter({ subsets: ["latin", "cyrillic"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-  title: "AI Money Master — Smart finance, on autopilot",
+  title: "AI Money Master — Умные финансы на автопилоте",
   description:
-    "AI Money Master tracks your assets, automates budgeting, and turns raw transactions into clear, actionable insights.",
+    "AI Money Master отслеживает ваши активы, автоматизирует бюджет и превращает транзакции в понятные и полезные выводы.",
 };
 
 export default function RootLayout({
@@ -18,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="ru" className={inter.variable}>
       <body className="min-h-screen bg-white font-sans text-slate-900 antialiased">
         <Header />
         <main>{children}</main>

@@ -14,25 +14,25 @@ export default function Hero() {
           <div className="animate-fade-in-up">
             <span className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white/70 px-4 py-1.5 text-xs font-semibold text-brand-700 shadow-sm">
               <span className="h-2 w-2 animate-pulse rounded-full bg-brand-500" />
-              New · AI insights v2.0 is live
+              Новое · AI-аналитика v2.0 уже доступна
             </span>
 
             <h1 className="mt-6 text-4xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
-              Smart finance,{" "}
+              Умные финансы{" "}
               <span className="bg-gradient-to-r from-brand-500 via-indigo-500 to-purple-500 bg-[length:200%_auto] bg-clip-text text-transparent animate-gradient-pan">
-                on autopilot
+                на автопилоте
               </span>
             </h1>
 
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-600">
-              AI Money Master connects your accounts, tracks every asset, and turns raw
-              transactions into clear, actionable insights — so you always know where your
-              money is going.
+              AI Money Master подключает ваши счета, отслеживает каждый актив и
+              превращает транзакции в понятные и полезные выводы — чтобы вы всегда
+              знали, куда уходят ваши деньги.
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Button href="#contact" size="lg">
-                Start for free
+                Начать бесплатно
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -47,15 +47,15 @@ export default function Hero() {
                 </svg>
               </Button>
               <Button href="#features" variant="secondary" size="lg">
-                See features
+                Посмотреть возможности
               </Button>
             </div>
 
             <dl className="mt-12 grid max-w-md grid-cols-3 gap-6">
               {[
-                { value: "$2.4B+", label: "Assets tracked" },
-                { value: "150k+", label: "Active users" },
-                { value: "4.9★", label: "App rating" },
+                { value: "$2.4млрд+", label: "Под контролем" },
+                { value: "150тыс+", label: "Активных пользователей" },
+                { value: "4.9★", label: "Рейтинг приложения" },
               ].map((stat) => (
                 <div key={stat.label}>
                   <dt className="text-2xl font-bold text-slate-900">{stat.value}</dt>
@@ -70,7 +70,7 @@ export default function Hero() {
             <div className="relative animate-float rounded-3xl border border-slate-200 bg-white p-6 shadow-2xl shadow-brand-600/10">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-slate-500">Total balance</p>
+                  <p className="text-sm text-slate-500">Общий баланс</p>
                   <p className="text-3xl font-bold text-slate-900">$48,920.50</p>
                 </div>
                 <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-600">
@@ -90,9 +90,9 @@ export default function Hero() {
 
               <div className="mt-6 space-y-3">
                 {[
-                  { name: "Groceries", amount: "-$84.20", color: "bg-amber-400" },
-                  { name: "Salary", amount: "+$5,200.00", color: "bg-emerald-400" },
-                  { name: "Subscriptions", amount: "-$42.99", color: "bg-rose-400" },
+                  { name: "Продукты", amount: "-$84.20", color: "bg-amber-400" },
+                  { name: "Зарплата", amount: "+$5,200.00", color: "bg-emerald-400" },
+                  { name: "Подписки", amount: "-$42.99", color: "bg-rose-400" },
                 ].map((row) => (
                   <div
                     key={row.name}

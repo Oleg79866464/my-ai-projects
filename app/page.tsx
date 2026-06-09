@@ -1,267 +1,177 @@
-import Hero from "@/components/Hero";
-import Card from "@/components/Card";
-import Button from "@/components/Button";
-import ContactForm from "@/components/ContactForm";
+export const dynamic = "force-dynamic";
 
-const features = [
-  {
-    title: "Автоматический бюджет",
-    description:
-      "Задайте цели один раз — AI каждый месяц пересчитывает бюджет на основе реальных трат.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-        <path d="M3 3v18h18" />
-        <path d="m19 9-5 5-4-4-3 3" />
-      </svg>
-    ),
-  },
-  {
-    title: "AI-категоризация",
-    description:
-      "Каждая транзакция помечается автоматически с точностью 99% — больше никакого ручного учёта.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-        <path d="M12 2 2 7l10 5 10-5-10-5Z" />
-        <path d="m2 17 10 5 10-5M2 12l10 5 10-5" />
-      </svg>
-    ),
-  },
-  {
-    title: "Учёт активов",
-    description:
-      "Банковские счета, крипта, акции и недвижимость — весь капитал на одной панели.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-        <rect width="20" height="14" x="2" y="5" rx="2" />
-        <path d="M2 10h20" />
-      </svg>
-    ),
-  },
-  {
-    title: "Банковская безопасность",
-    description:
-      "256-битное шифрование, подключения только для чтения и соответствие SOC 2 надёжно защищают ваши данные.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
-      </svg>
-    ),
-  },
-  {
-    title: "Умные уведомления",
-    description:
-      "Получайте уведомления о подозрительных списаниях, предстоящих платежах и возможностях для экономии в реальном времени.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-        <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
-        <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
-      </svg>
-    ),
-  },
-  {
-    title: "Прогнозирование",
-    description:
-      "Предиктивные модели прогнозируют ваш денежный поток на недели вперёд, чтобы вы планировали уверенно.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
-      </svg>
-    ),
-  },
-];
+import type { Metadata } from "next";
+import Link from "next/link";
+import { createSupabaseServerClient } from "@/lib/supabase";
 
-const steps = [
-  {
-    step: "01",
-    title: "Подключите счета",
-    description: "Безопасно привяжите банки, карты и инвестиционные счета менее чем за две минуты.",
+export const metadata: Metadata = {
+  title: "Каталог AI-инструментов — премиальный русскоязычный SaaS-каталог",
+  description:
+    "Русскоязычный каталог AI-инструментов с поиском, фильтрами, SEO, партнерскими переходами и аналитикой кликов на Supabase.",
+  alternates: {
+    canonical: "/",
   },
-  {
-    step: "02",
-    title: "Доверьтесь AI",
-    description: "Транзакции категоризируются, бюджеты формируются, а выводы начинают поступать.",
-  },
-  {
-    step: "03",
-    title: "Управляйте деньгами",
-    description: "Следуйте понятным рекомендациям и наблюдайте, как растёт ваш капитал месяц за месяцем.",
-  },
-];
+};
 
-const plans = [
-  {
-    name: "Старт",
-    price: "$0",
-    period: "/мес",
-    features: ["1 подключённый счёт", "Базовый бюджет", "Ежемесячные отчёты"],
-    cta: "Начать",
-    highlighted: false,
-  },
-  {
-    name: "Pro",
-    price: "$12",
-    period: "/мес",
-    features: ["Безлимит счетов", "AI-категоризация", "Умные уведомления", "Прогнозирование"],
-    cta: "Начать пробный период",
-    highlighted: true,
-  },
-  {
-    name: "Business",
-    price: "$39",
-    period: "/мес",
-    features: ["Всё из Pro", "Командные рабочие пространства", "Доступ к API", "Приоритетная поддержка"],
-    cta: "Связаться с отделом продаж",
-    highlighted: false,
-  },
-];
+const revShareRate = 0.15;
+const clickBenchmark = 0.05;
 
-export default function Home() {
+function normalizeText(value: string | null | undefined): string {
+  return (value ?? "").trim();
+}
+
+function buildSiteUrl(slug: string): string {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  return new URL(slug, baseUrl).toString();
+}
+
+function moneyUsd(value: number): string {
+  return new Intl.NumberFormat("ru-RU", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 2,
+  }).format(value);
+}
+
+export default async function HomePage({ searchParams }: { searchParams?: Record<string, string | string[] | undefined> }) {
+  const supabase = createSupabaseServerClient();
+  const query = normalizeText(typeof searchParams?.q === "string" ? searchParams.q : undefined);
+  const category = normalizeText(typeof searchParams?.category === "string" ? searchParams.category : undefined);
+  const pricing = normalizeText(typeof searchParams?.pricing === "string" ? searchParams.pricing : undefined);
+
+  let toolsQuery = supabase
+    .from("tools")
+    .select("id, name, slug, description, domain, logo_url, category, pricing_model, partner_slug, partner_id, seo_title, seo_description, clicks_count, created_at, featured")
+    .eq("is_active", true)
+    .order("featured", { ascending: false })
+    .order("clicks_count", { ascending: false })
+    .order("created_at", { ascending: false });
+
+  if (query) {
+    toolsQuery = toolsQuery.or(`name.ilike.%${query}%,description.ilike.%${query}%,category.ilike.%${query}%,tags.cs.{${query}}`);
+  }
+
+  if (category) {
+    toolsQuery = toolsQuery.eq("category", category);
+  }
+
+  if (pricing) {
+    toolsQuery = toolsQuery.eq("pricing_model", pricing);
+  }
+
+  const { data: tools, error } = await toolsQuery;
+
+  if (error) {
+    throw new Error(`Не удалось загрузить каталог: ${error.message}`);
+  }
+
+  const categories = Array.from(new Set((tools ?? []).map((tool) => tool.category).filter(Boolean))).sort((a, b) => a.localeCompare(b, "ru"));
+  const totalClicks = (tools ?? []).reduce((sum, tool) => sum + (tool.clicks_count ?? 0), 0);
+  const projectedRevShare = totalClicks * revShareRate * 29;
+  const benchmarkRevenue = totalClicks * clickBenchmark;
+
+  const toolSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Каталог AI-инструментов",
+    itemListElement: (tools ?? []).map((tool, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: buildSiteUrl(`/go/${tool.slug}`),
+      name: tool.name,
+    })),
+  };
+
   return (
-    <>
-      <Hero />
-
-      {/* Features */}
-      <section id="features" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            Всё необходимое, чтобы управлять деньгами
-          </h2>
-          <p className="mt-4 text-lg text-slate-600">
-            Одна умная платформа, которая заменяет десятки таблиц и приложений, которыми вы пользуетесь сейчас.
-          </p>
-        </div>
-
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map((f) => (
-            <Card key={f.title} title={f.title} description={f.description} icon={f.icon} />
-          ))}
-        </div>
-      </section>
-
-      {/* How it works */}
-      <section id="how-it-works" className="bg-slate-50 py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-              Готово к работе за несколько минут
-            </h2>
-            <p className="mt-4 text-lg text-slate-600">
-              Никаких таблиц и ручного ввода. Три простых шага к ясности в финансах.
+    <main className="min-h-screen bg-[#050816] text-slate-100">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(toolSchema) }} />
+      <section className="border-b border-white/10 bg-[radial-gradient(circle_at_top,rgba(109,40,217,0.28),transparent_34%),linear-gradient(180deg,#0b1020_0%,#050816_100%)]">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <p className="text-sm font-medium uppercase tracking-[0.3em] text-violet-300">Русскоязычный SaaS-каталог</p>
+            <h1 className="mt-4 text-4xl font-semibold tracking-tight text-white sm:text-6xl">
+              Каталог AI-инструментов для команд, агентств и создателей продуктов
+            </h1>
+            <p className="mt-6 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">
+              SSR-поиск, фильтры по категориям, SEO-структура, партнерские переходы и аналитика кликов — всё на одной премиальной платформе.
             </p>
-          </div>
-
-          <div className="mt-14 grid gap-8 md:grid-cols-3">
-            {steps.map((s) => (
-              <div key={s.step} className="relative rounded-2xl bg-white p-8 shadow-sm">
-                <span className="text-5xl font-extrabold text-brand-100">{s.step}</span>
-                <h3 className="mt-4 text-xl font-semibold text-slate-900">{s.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">{s.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing */}
-      <section id="pricing" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            Простые и прозрачные тарифы
-          </h2>
-          <p className="mt-4 text-lg text-slate-600">
-            Начните бесплатно. Переходите на платный, когда будете готовы. Отмена в любой момент.
-          </p>
-        </div>
-
-        <div className="mt-14 grid gap-8 lg:grid-cols-3">
-          {plans.map((plan) => (
-            <div
-              key={plan.name}
-              className={`relative flex flex-col rounded-2xl border p-8 transition-all duration-300 hover:-translate-y-1 ${
-                plan.highlighted
-                  ? "border-brand-500 bg-white shadow-2xl shadow-brand-600/20 ring-1 ring-brand-500"
-                  : "border-slate-200 bg-white shadow-sm"
-              }`}
-            >
-              {plan.highlighted && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-brand-600 px-4 py-1 text-xs font-semibold text-white">
-                  Популярный
-                </span>
-              )}
-              <h3 className="text-lg font-semibold text-slate-900">{plan.name}</h3>
-              <div className="mt-4 flex items-baseline gap-1">
-                <span className="text-4xl font-extrabold text-slate-900">{plan.price}</span>
-                <span className="text-sm text-slate-500">{plan.period}</span>
-              </div>
-              <ul className="mt-6 flex-1 space-y-3">
-                {plan.features.map((feat) => (
-                  <li key={feat} className="flex items-center gap-3 text-sm text-slate-600">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth={2.5}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="h-4 w-4 text-brand-600"
-                    >
-                      <path d="M20 6 9 17l-5-5" />
-                    </svg>
-                    {feat}
-                  </li>
-                ))}
-              </ul>
-              <Button
-                href="#contact"
-                variant={plan.highlighted ? "primary" : "secondary"}
-                className="mt-8 w-full"
-              >
-                {plan.cta}
-              </Button>
+            <div className="mt-8 flex flex-wrap gap-4 text-sm text-slate-300">
+              <div className="rounded-full border border-white/10 bg-white/5 px-4 py-2">Инструментов: {tools?.length ?? 0}</div>
+              <div className="rounded-full border border-white/10 bg-white/5 px-4 py-2">Кликов: {totalClicks}</div>
+              <div className="rounded-full border border-white/10 bg-white/5 px-4 py-2">RevShare: {moneyUsd(projectedRevShare)}</div>
             </div>
+          </div>
+
+          <form className="mt-10 grid gap-4 rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur sm:grid-cols-3">
+            <input
+              name="q"
+              defaultValue={query}
+              placeholder="Поиск по названию, описанию и тегам"
+              className="rounded-2xl border border-white/10 bg-[#0b1120] px-4 py-3 text-sm text-white placeholder:text-slate-400"
+            />
+            <select name="category" defaultValue={category} className="rounded-2xl border border-white/10 bg-[#0b1120] px-4 py-3 text-sm text-white">
+              <option value="">Все категории</option>
+              {categories.map((item) => (
+                <option key={item} value={item}>
+                  {item}
+                </option>
+              ))}
+            </select>
+            <select name="pricing" defaultValue={pricing} className="rounded-2xl border border-white/10 bg-[#0b1120] px-4 py-3 text-sm text-white">
+              <option value="">Любая модель оплаты</option>
+              <option value="free">Бесплатно</option>
+              <option value="freemium">Freemium</option>
+              <option value="subscription">Подписка</option>
+              <option value="one_time">Разовый платеж</option>
+            </select>
+            <div className="sm:col-span-3">
+              <button type="submit" className="inline-flex rounded-full bg-violet-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-violet-400">
+                Применить фильтры
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {(tools ?? []).map((tool) => (
+            <article key={tool.id} className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl shadow-black/20">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.25em] text-violet-300">{tool.category}</p>
+                  <h2 className="mt-2 text-2xl font-semibold text-white">{tool.name}</h2>
+                </div>
+                {tool.featured ? <span className="rounded-full bg-emerald-400/15 px-3 py-1 text-xs font-medium text-emerald-300">Рекомендуем</span> : null}
+              </div>
+              <p className="mt-4 line-clamp-4 text-sm leading-6 text-slate-300">{tool.description}</p>
+              <dl className="mt-6 grid grid-cols-2 gap-4 text-sm text-slate-300">
+                <div>
+                  <dt className="text-slate-400">Модель</dt>
+                  <dd className="mt-1 text-white">{tool.pricing_model}</dd>
+                </div>
+                <div>
+                  <dt className="text-slate-400">Кликов</dt>
+                  <dd className="mt-1 text-white">{tool.clicks_count ?? 0}</dd>
+                </div>
+              </dl>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Link href={`/go/${tool.slug}`} className="rounded-full bg-violet-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-violet-400">
+                  Открыть инструмент
+                </Link>
+                <a href={`https://${tool.domain}`} target="_blank" rel="noreferrer" className="rounded-full border border-white/10 px-5 py-3 text-sm font-medium text-slate-200 transition hover:bg-white/5">
+                  {tool.domain}
+                </a>
+              </div>
+              <p className="mt-5 text-xs leading-5 text-slate-400">
+                {benchmarkRevenue > projectedRevShare
+                  ? "Порог $0.05/click проигрывает RevShare: при росте трафика фиксированная ставка не масштабируется, а партнёрская доля сохраняет upside проекта."
+                  : "RevShare сохраняет мотивацию к росту дохода и лучше фиксированной ставки при масштабировании каталога."}
+              </p>
+            </article>
           ))}
         </div>
       </section>
-
-      {/* Contact / CTA */}
-      <section id="contact" className="bg-slate-50 py-20">
-        <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
-          <div className="flex flex-col justify-center">
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-              Готовы поставить финансы на автопилот?
-            </h2>
-            <p className="mt-4 text-lg text-slate-600">
-              Присоединяйтесь к списку ожидания и узнавайте первыми о новых AI-функциях. Никакого спама.
-            </p>
-            <ul className="mt-8 space-y-4">
-              {[
-                "Бесплатный 14-дневный пробный период Pro",
-                "Без привязки карты",
-                "Отмена в любой момент",
-              ].map((item) => (
-                <li key={item} className="flex items-center gap-3 text-slate-700">
-                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-100 text-brand-600">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth={3}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="h-3.5 w-3.5"
-                    >
-                      <path d="M20 6 9 17l-5-5" />
-                    </svg>
-                  </span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <ContactForm />
-        </div>
-      </section>
-    </>
+    </main>
   );
 }

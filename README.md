@@ -1,50 +1,69 @@
-# AI Money Master
+# AI Catalog RU
 
-A modern landing page for **AI Money Master**, built with **Next.js 14 (App Router)**, **React 18**, **TypeScript**, and **Tailwind CSS**.
+Русскоязычный каталог AI-инструментов для маркетологов, копирайтеров, SMM-специалистов и блогеров.
 
-## Features
+## Стек
+- Next.js 14 App Router
+- React Server Components
+- Tailwind CSS
+- Supabase PostgreSQL
+- Python 3.11 parser
+- Pydantic v2
 
-- Responsive landing page (mobile + desktop) with a sticky, collapsible header
-- Hero section with animated gradient headline, floating dashboard mockup, and stats
-- Feature grid, "How it works" steps, pricing tiers, and a working contact form
-- Reusable components: `Header`, `Footer`, `Button`, `Card`, `Hero`, `ContactForm`
-- Tailwind-powered animations (fade-in, float, animated gradient)
+## Что входит
+- SSR-каталог с поиском и фильтрами
+- SEO-метаданные, OpenGraph, schema.org, sitemap.xml и robots.txt
+- Серверный трекинг кликов с UTM
+- Закрытая админка с KPI и CSV-экспортом
+- Python-парсер `taaft.json` в чистый JSON для импорта в Supabase
 
-## Project structure
+## Переменные окружения
+Скопируйте `.env.example` в `.env.local` и заполните значения.
 
-```
-app/
-  layout.tsx     # Root layout (Header + Footer + fonts)
-  page.tsx       # Home page (Hero, Features, Pricing, Contact)
-  globals.css    # Tailwind directives + base styles
-  icon.svg       # App favicon
-components/
-  Header.tsx
-  Footer.tsx
-  Button.tsx
-  Card.tsx
-  Hero.tsx
-  ContactForm.tsx
-public/
-  logo.svg
-```
-
-## Getting started
-
-Install dependencies and start the dev server:
-
+## Установка
 ```bash
 npm install
+```
+
+## Запуск
+```bash
 npm run dev
 ```
 
-Then open [http://localhost:3000](http://localhost:3000) in your browser.
+## Парсер
+```bash
+cd parser && python3.11 -m venv venv && source venv/bin/activate
+pip install pydantic==2.5.3 requests==2.31.0 beautifulsoup4==4.12.3
+python parser.py
+```
 
-## Scripts
+## Supabase
+1. Создайте проект на supabase.com.
+2. Выполните `db/schema.sql` в SQL Editor.
+3. Импортируйте `tools_clean.json` в таблицу `tools`.
 
-| Command         | Description                          |
-| --------------- | ------------------------------------ |
-| `npm run dev`   | Start the development server         |
-| `npm run build` | Build the production bundle          |
-| `npm run start` | Start the production server          |
-| `npm run lint`  | Run ESLint (next lint)               |
+## Деплой на Vercel
+```bash
+vercel login
+vercel
+vercel --prod
+```
+
+## Партнёрские программы
+- Jasper — PartnerStack, 30%
+- SurferSEO — Impact, 25%
+- Copy.ai — партнёрская программа, 20%
+- Writesonic — партнёрская программа, 20%
+- Semrush — партнёрская программа, до 40%
+
+## Формула монетизации
+`estimated_revenue = clicks × 0.15 × $29 × commission_rate`
+
+Модель `$0.05/клик` проигрывает RevShare, потому что она не растёт вместе с качеством трафика и не учитывает ценность платной подписки. RevShare лучше масштабируется и выгоднее для премиального каталога.
+
+## Чеклист после деплоя
+- [ ] Добавить env vars в Vercel
+- [ ] Проверить `/go/[id]` редирект и запись кликов
+- [ ] Отправить sitemap в Google Search Console
+- [ ] Настроить `affiliate_url` для топ-инструментов
+- [ ] Проверить CSV-экспорт в админке

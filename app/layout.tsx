@@ -7,30 +7,28 @@ const inter = Inter({ subsets: ["latin", "cyrillic"], variable: "--font-inter" }
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   title: {
-    default: "Каталог AI-инструментов",
-    template: "%s · Каталог AI-инструментов",
+    default: "AI Catalog RU",
+    template: "%s | AI Catalog — нейросети для маркетинга",
   },
-  description: "Премиальный русскоязычный каталог AI-инструментов с SSR, SEO, партнёрскими переходами и Supabase.",
+  description: "Проверенные ИИ-инструменты для создания контента: текст, видео, изображения. Бесплатно и с партнёрскими скидками.",
+  alternates: {
+    languages: {
+      "ru-RU": "/",
+    },
+  },
   openGraph: {
-    title: "Каталог AI-инструментов",
-    description: "Премиальный русскоязычный каталог AI-инструментов с SSR, SEO, партнёрскими переходами и Supabase.",
-    type: "website",
     locale: "ru_RU",
-    siteName: "Каталог AI-инструментов",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Каталог AI-инструментов",
-    description: "Премиальный русскоязычный каталог AI-инструментов с SSR, SEO, партнёрскими переходами и Supabase.",
+    siteName: "AI Catalog RU",
+    type: "website",
+    title: "AI Catalog RU",
+    description: "Проверенные ИИ-инструменты для создания контента: текст, видео, изображения. Бесплатно и с партнёрскими скидками.",
   },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ru" className={inter.variable}>
-      <body className="min-h-screen bg-[#050816] font-sans text-slate-100 antialiased">
-        {children}
-      </body>
+      <body className="min-h-screen bg-[#050816] font-sans text-slate-100 antialiased">{children}</body>
     </html>
   );
 }
